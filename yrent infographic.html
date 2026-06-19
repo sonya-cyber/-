@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юрент — Медиа-аналитика 2025</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --purple-900: #1a0033;
+    --purple-800: #2d0052;
+    --purple-700: #4a0080;
+    --purple-600: #6600b3;
+    --purple-500: #8a00e6;
+    --purple-400: #a832ff;
+    --purple-300: #c47aff;
+    --purple-200: #ddb3ff;
+    --purple-100: #f2e0ff;
+    --purple-50:  #faf0ff;
+    --accent: #c800ff;
+    --white: #ffffff;
+    --gray-50: #f8f5fc;
+    --gray-100: #ede5f7;
+    --text-dark: #1a0033;
+    --text-mid: #4a0080;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-50);
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 60%, var(--purple-500) 100%);
+    color: var(--white);
+    padding: 56px 64px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,50,255,0.35) 0%, transparent 70%);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 20%;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,0,255,0.2) 0%, transparent 70%);
+  }
+  .header-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--purple-300);
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 span { color: var(--purple-300); }
+  .header-sub {
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-meta {
+    margin-top: 32px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .meta-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── KPI ROW ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--purple-800);
+  }
+  .kpi-card {
+    padding: 28px 32px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+  }
+  .kpi-card:last-child { border-right: none; }
+  .kpi-num {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--purple-300);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.5px;
+  }
+  .kpi-delta {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7fff7f;
+    background: rgba(0,200,80,0.15);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .kpi-delta.neg { color: #ff9090; background: rgba(255,50,50,0.15); }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 56px 64px;
+  }
+  .section-alt { background: var(--white); }
+  .section-dark {
+    background: linear-gradient(135deg, var(--purple-900), var(--purple-800));
+    color: var(--white);
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--purple-500);
+    margin-bottom: 8px;
+  }
+  .section-dark .section-eyebrow { color: var(--purple-300); }
+
+  .section-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--purple-900);
+    margin-bottom: 40px;
+    line-height: 1.15;
+  }
+  .section-dark .section-title { color: var(--white); }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 48px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px; top: 8px; bottom: 8px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--purple-400), var(--purple-600), var(--purple-800));
+    border-radius: 4px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 36px;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -40px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--purple-400);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--purple-400);
+  }
+  .tl-date {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--purple-500);
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--purple-900);
+    margin-bottom: 6px;
+  }
+  .tl-body {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .tl-stat {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--purple-100);
+    color: var(--purple-700);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* ── TWO-COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  /* ── STAT CARDS ── */
+  .stat-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 16px;
+    padding: 28px;
+    border-left: 4px solid var(--purple-400);
+  }
+  .stat-card-num {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--purple-600);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-card-label { font-size: 14px; color: #666; font-weight: 500; }
+  .stat-card-sub { font-size: 12px; color: #999; margin-top: 6px; }
+
+  /* ── BAR CHART ── */
+  .bar-chart { display: flex; flex-direction: column; gap: 16px; }
+  .bar-item { }
+  .bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+  .bar-label span { color: var(--purple-600); font-weight: 700; }
+  .bar-track {
+    height: 10px;
+    background: var(--purple-100);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--purple-400), var(--purple-600));
+    transition: width 1s ease;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .comp-table { border-collapse: collapse; width: 100%; }
+  .comp-table th {
+    background: var(--purple-700);
+    color: var(--white);
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .comp-table th:first-child { border-radius: 12px 0 0 0; }
+  .comp-table th:last-child { border-radius: 0 12px 0 0; }
+  .comp-table td {
+    padding: 12px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:nth-child(even) td { background: var(--gray-50); }
+  .good { color: #1a7a1a; font-weight: 600; }
+  .bad  { color: #b00020; font-weight: 600; }
+
+  /* ── DONUT ── */
+  .donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .donut-legend { flex: 1; }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
+    color: var(--white);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-top: 32px;
+  }
+  .highlight-box .big { font-size: 48px; font-weight: 900; margin-bottom: 4px; }
+  .highlight-box .label { font-size: 14px; opacity: 0.8; }
+
+  /* ── INSIGHT PILLS ── */
+  .insights { display: flex; flex-direction: column; gap: 16px; }
+  .insight {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid var(--purple-400);
+    box-shadow: 0 2px 8px rgba(100,0,180,0.06);
+  }
+  .insight-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--purple-100);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .insight-title { font-size: 15px; font-weight: 700; color: var(--purple-900); margin-bottom: 4px; }
+  .insight-body { font-size: 13px; color: #555; line-height: 1.55; }
+
+  /* ── SOURCE ── */
+  .sources {
+    padding: 24px 64px;
+    background: var(--purple-900);
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  /* ── SVG DONUT ── */
+  svg.donut { transform: rotate(-90deg); }
+  .donut-text { transform: rotate(90deg); }
+
+  @media (max-width: 900px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .header { padding: 40px 28px 36px; }
+    .header h1 { font-size: 36px; }
+    .section { padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">Медиа-статистический анализ · Триангуляция данных</div>
+  <h1>МТС <span>Юрент</span><br>2025–2026</h1>
+  <div class="header-sub">Кикшеринг: масштаб, безопасность, регулирование. Три верифицированных источника данных в одном инфографике.</div>
+  <div class="header-meta">
+    <div class="meta-pill">📍 205 городов РФ и Беларуси</div>
+    <div class="meta-pill">📅 Период: 2025–2026</div>
+    <div class="meta-pill">🔍 Источники: МВД, Мобилити, Дептранс</div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-num">15,5 млрд</div>
+    <div class="kpi-label">GMV Юрент 2025, руб.</div>
+    <div class="kpi-delta">↑ +23,7% г/г</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">242,8 млн</div>
+    <div class="kpi-label">Поездок по РФ за 9 мес. 2025</div>
+    <div class="kpi-delta">↑ +26,7% г/г</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">25 млн</div>
+    <div class="kpi-label">Уникальных пользователей</div>
+    <div class="kpi-delta">≈ 1/3 эк. активн. населения</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">−57%</div>
+    <div class="kpi-label">ДТП с арендными СИМ в Москве</div>
+    <div class="kpi-delta">−72% с участием детей</div>
+  </div>
+</div>
+
+<!-- SECTION 1: TIMELINE -->
+<div class="section section-alt">
+  <div class="section-eyebrow">Блок 1 · Хронология</div>
+  <div class="section-title">Таймлайн: ключевые события рынка кикшеринга</div>
+  <div class="two-col">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2019</div>
+        <div class="tl-title">Первое соглашение с Москвой</div>
+        <div class="tl-body">Операторы подписывают Соглашение/Оферту с городом — старт легального регулирования кикшеринга.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2023–2024</div>
+        <div class="tl-title">Дорожная карта Правительства РФ</div>
+        <div class="tl-body">Принята Дорожная карта по интеграции СИМ в транспортную систему. Введены возрастной порог 16+/18+ и медленные зоны.</div>
+        <div class="tl-stat">Более 2 млн обученных пользователей (Школы ПДД)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Сезон 2024</div>
+        <div class="tl-title">Рост частных СИМ и аварийности</div>
+        <div class="tl-body">Доля ДТП с личными самокатами: 34,2%. Причина — пользователи покупают их, чтобы обойти ограничения кикшеринга.</div>
+        <div class="tl-stat">4 426 ДТП · 54 погибших</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Апрель–Май 2025</div>
+        <div class="tl-title">Запреты в Подмосковье</div>
+        <div class="tl-body">Лобня, Люберцы, Котельники, Раменское, Солнечногорск — полностью запретили кикшеринг. Цель: давление на операторов для выработки правил.</div>
+        <div class="tl-stat">Люберцы: 1,5 млн поездок/год под запретом</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Декабрь 2025</div>
+        <div class="tl-title">Запуск шеринга снегокатов</div>
+        <div class="tl-body">Юрент диверсифицирует продукт. Парк обновлён: 50 тыс. самокатов, 15 тыс. — собственной разработки R&D-центра в РБ.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">9 мес. 2025</div>
+        <div class="tl-title">Итоги сезона — рекордное снижение ДТП</div>
+        <div class="tl-body">МВД фиксирует −26% ДТП по СИМ в целом. Кикшеринг: −46% аварий и −35% ДТП на 100 тыс. поездок. Но погибших: +25,9%.</div>
+        <div class="tl-stat">3 275 ДТП · 68 погибших</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: TRANSPORT MODEL -->
+<div class="section">
+  <div class="section-eyebrow">Блок 2 · Транспортная модель</div>
+  <div class="section-title">Самокат как транспорт, а не развлечение</div>
+  <div class="three-col">
+    <div class="stat-card">
+      <div class="stat-card-num">85–90%</div>
+      <div class="stat-card-label">Доля транспортных поездок (А→Б) по РФ</div>
+      <div class="stat-card-sub">В Москве — 85%, в Яндекс Go — 94%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-num">67%</div>
+      <div class="stat-card-label">Пользователей совмещают самокат с общественным транспортом</div>
+      <div class="stat-card-sub">Расширяют радиус ТПУ с 700м до 2–3 км</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-num">50%</div>
+      <div class="stat-card-label">Поездок начинаются или заканчиваются у крупных транспортных узлов</div>
+      <div class="stat-card-sub">«Последняя миля» — ключевой сценарий</div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <div style="font-size:15px; font-weight:700; color:var(--purple-900); margin-bottom:20px;">Эволюция поведения: от развлечения к транспорту</div>
+    <div class="bar-chart">
+      <div class="bar-item">
+        <div class="bar-label">1-я поездка — развлекательная <span>43%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:43%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">10-я поездка — развлекательная <span>25%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">30-я поездка — развлекательная <span>20%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Используют ТОЛЬКО для развлечения <span>6%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:6%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: SAFETY (dark) -->
+<div class="section section-dark">
+  <div class="section-eyebrow">Блок 3 · Безопасность</div>
+  <div class="section-title">Динамика аварийности: кикшеринг vs частные СИМ</div>
+  <div class="two-col">
+    <div>
+      <div style="font-size:14px; font-weight:600; margin-bottom:20px; color:var(--purple-200);">Кикшеринг — снижение аварийности</div>
+      <div class="bar-chart">
+        <div class="bar-item">
+          <div class="bar-label" style="color:rgba(255,255,255,0.8);">ДТП с аренд. СИМ по РФ <span style="color:var(--purple-300);">−46%</span></div>
+          <div class="bar-track" style="background:rgba(255,255,255,0.1)"><div class="bar-fill" style="width:46%; background:linear-gradient(90deg,#7fff7f,#2fd42f)"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label" style="color:rgba(255,255,255,0.8);">ДТП на 100 тыс. поездок <span style="color:var(--purple-300);">−35%</span></div>
+          <div class="bar-track" style="background:rgba(255,255,255,0.1)"><div class="bar-fill" style="width:35%; background:linear-gradient(90deg,#7fff7f,#2fd42f)"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label" style="color:rgba(255,255,255,0.8);">ДТП с арендными СИМ в Москве <span style="color:var(--purple-300);">−57%</span></div>
+          <div class="bar-track" style="background:rgba(255,255,255,0.1)"><div class="bar-fill" style="width:57%; background:linear-gradient(90deg,#7fff7f,#2fd42f)"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label" style="color:rgba(255,255,255,0.8);">ДТП с детьми в Москве <span style="color:var(--purple-300);">−72%</span></div>
+          <div class="bar-track" style="background:rgba(255,255,255,0.1)"><div class="bar-fill" style="width:72%; background:linear-gradient(90deg,#7fff7f,#2fd42f)"></div></div>
+        </div>
+      </div>
+      <div style="margin-top:28px; padding:20px; background:rgba(255,255,255,0.07); border-radius:12px; border-left:4px solid var(--purple-300);">
+        <div style="font-size:28px; font-weight:900; color:var(--purple-300);">0,18</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">травм на 100 000 поездок (РФ, 2025)<br>vs 0,71 в Европе (Micro-Mobility for Europe, 2024)</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:14px; font-weight:600; margin-bottom:20px; color:var(--purple-200);">Частные СИМ — рост аварийности</div>
+      <div style="padding:24px; background:rgba(255,80,80,0.12); border-radius:12px; border:1px solid rgba(255,100,100,0.3); margin-bottom:20px;">
+        <div style="font-size:36px; font-weight:900; color:#ff9090;">44,2%</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">доля ДТП с личными СИМ в 2025<br>(было 34,2% в 2024, рост на 10 п.п.)</div>
+      </div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); line-height:1.6; padding:16px; background:rgba(255,255,255,0.05); border-radius:10px;">
+        <strong style="color:var(--purple-200);">Почему?</strong><br>
+        53,8% владельцев личных самокатов купили их специально, чтобы обойти технические ограничения кикшеринга — скоростные лимиты и геозоны.
+      </div>
+      <div style="margin-top:20px; padding:20px; background:rgba(255,255,255,0.07); border-radius:12px; border-left:4px solid #ff9090;">
+        <div style="font-size:28px; font-weight:900; color:#ff9090;">+25,9%</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-top:4px;">рост числа погибших в ДТП с СИМ в 2025<br>(68 погибших vs 54 в 2024)</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-top:6px;">Источник: НЦ БДД МВД России</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: REGULATION -->
+<div class="section section-alt">
+  <div class="section-eyebrow">Блок 4 · Регулирование</div>
+  <div class="section-title">Что работает, а что нет: оценка регуляторных мер</div>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th style="width:50%">✅ Эффективные меры (снижают ДТП)</th>
+        <th style="width:50%">❌ Неэффективные меры (не влияют на ДТП)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="good">Развитие изолированной велоинфраструктуры</td>
+        <td class="bad">Полные запреты ночных поездок<br><small style="color:#777">Ломают транспортный сценарий без влияния на ДТП</small></td>
+      </tr>
+      <tr>
+        <td class="good">Возрастной порог 16+ (операторы уже применяют)</td>
+        <td class="bad">Тотальное снижение скорости ниже 20 км/ч<br><small style="color:#777">Не подтверждено снижением аварийности</small></td>
+      </tr>
+      <tr>
+        <td class="good">Блокировка аккаунтов нарушителей<br><small style="color:#777">98,4% не нарушают повторно после штрафа</small></td>
+        <td class="bad">«Медленные зоны» абсолютно на всех перекрёстках<br><small style="color:#777">Создают опасные аварийные торможения</small></td>
+      </tr>
+      <tr>
+        <td class="good">Обязательный онбординг / Школы ПДД<br><small style="color:#777">Более 2 млн обученных пользователей</small></td>
+        <td class="bad">Крупные номера без интеграции с ИИ-камерами ЦОДД<br><small style="color:#777">Номера как атрибут без системы фиксации — неэффективны</small></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:32px; padding:24px; background:var(--purple-100); border-radius:14px;">
+    <div style="font-weight:700; color:var(--purple-800); margin-bottom:8px;">📊 Поисковые запросы «Штрафы самокат» (Яндекс Вордстат)</div>
+    <div style="font-size:13px; color:var(--purple-700);">
+      Март 2026: <strong>1 000</strong> запросов → Май 2026: <strong>9 442</strong> запроса (+844%). Для сравнения, в мае 2025: 15 985 запросов. Рост интереса к санкционной повестке сопровождает начало каждого прокатного сезона.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: INSIGHTS -->
+<div class="section">
+  <div class="section-eyebrow">Триангуляция · 3 ключевых инсайта</div>
+  <div class="section-title">Главные выводы по трём источникам данных</div>
+  <div class="insights">
+    <div class="insight">
+      <div class="insight-icon">🚦</div>
+      <div>
+        <div class="insight-title">Инсайт 1. Кикшеринг системно безопаснее частных СИМ — но государство видит рост смертности</div>
+        <div class="insight-body">По данным МВД (первичные данные НЦ БДД), абсолютное число ДТП снизилось на 26%, однако число погибших выросло на 25,9% — до 68 человек. Операторы фиксируют −46% аварий с арендными самокатами. Расхождение объясняется резким ростом аварийности частных СИМ: их доля в ДТП выросла с 34,2% до 44,2%. Регулятор реагирует на абсолютные цифры смертности, операторы — на относительные. Оба правы в своей системе отсчёта.</div>
+      </div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">🚇</div>
+      <div>
+        <div class="insight-title">Инсайт 2. Самокат стал инфраструктурой, а не аттракционом</div>
+        <div class="insight-body">85–94% поездок — транспортные (А→Б). 67% пользователей совмещают его с общественным транспортом, 50% поездок начинаются/заканчиваются у ТПУ. Данные Яндекс Go показывают, что 33% маршрутов постоянных пользователей строго повторяются («дом–метро»). Городской транспорт без «последней мили» теряет 2–3 км радиуса охвата каждого ТПУ — это неминуемо возвращает людей в автомобили.</div>
+      </div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">⚖️</div>
+      <div>
+        <div class="insight-title">Инсайт 3. Запреты создают теневой рынок опасных частных СИМ</div>
+        <div class="insight-body">53,8% владельцев личных самокатов покупают их специально, чтобы обойти ограничения кикшеринга. Запрет операторов не убирает самокаты с улиц — он убирает контролируемые, ограниченные по скорости и геозонам аппараты, заменяя их нерегулируемыми частными. Подмосковные кейсы (Люберцы, Лобня) подтверждают: запрет работает как инструмент давления, а не снижения аварийности.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <strong style="color:rgba(255,255,255,0.7);">Источники данных:</strong> НЦ БДД МВД России (Официальный отчёт, раздел 4.8) · Отчёт о социальном влиянии кикшеринга «Мобилити» · Департамент транспорта Москвы / Трушеринг · Яндекс.Исследования (Яндекс Go) · Cnews (данные «Юрент») · ИА Rusbase (RB.ru) · Яндекс Вордстат · Ведомости.ру · Администрации округов Лобня, Люберцы, Котельники · Micro-Mobility for Europe, 2024.
+  <br>Период анализа: 2025–2026 гг. (9 месяцев 2025 г., если не указано иное). Аналитика подготовлена на основе триангуляции интернет-статистики, вторичных и первичных данных.
+</div>
+
+</body>
+</html>
